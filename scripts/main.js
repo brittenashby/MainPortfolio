@@ -11,9 +11,9 @@ function cardFront(duckData) {
   
     caption.textContent = duckData.Name
     if (duckData.id !== 0) {
-      image.src = `../FORWARDS/${duckData.Name}@2x.jpg`
+      image.src = `../players/${duckData.imageName}@2x.jpg`
     } else {
-      image.src = `../images/pokeball.png`
+      image.src = `ducksLogo.gif`
     }
   
     figure.appendChild(image)
@@ -44,7 +44,7 @@ function cardFront(duckData) {
     let cardBack = document.createElement('div')
     let backImage = document.createElement('img')
     backImage.className = 'backImage'
-    backImage.src = `../images/pokeball.png`
+    backImage.src = `ducksLogo.gif`
     cardBack.className = 'card__face card__face--back'
     cardBack.appendChild(backImage)
     cardBack.appendChild(cardBackInfo(duckData))
@@ -69,13 +69,21 @@ function cardFront(duckData) {
   }
 
   function matchIdToImage(aDuck) {
-      let lowerCaseName = aDuck.Name.toLowerCase()
-    lowerCaseName = lowerCaseName.replace(" ", "_") 
-    aDuck.Name = lowerCaseName
-    console.log(lowerCaseName)
+    let lowerCaseName = aDuck.Name.toLowerCase()
+    aDuck.imageName = lowerCaseName.replace(" ", "_") 
     return aDuck
   }
 
   anaheimDucks.forEach(duck => {
-      createDuckCard(duck)
+      createDuckCard(matchIdToImage(duck))
+  })
+
+  // Put the Duck class here with a new Duck constructor function
+
+
+const newDuckButton = document.querySelector('.button')
+  
+newDuckButton.addEventListener('click', function () {
+  console.log("Thanks for clicking!")
+    //createPokeCard(matchIdToImage(new Pokemon('Thoremon')))
   })
